@@ -15,6 +15,19 @@ class App extends Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
+    if (parsedContacts) {
+      this.setState({ contacts: parsedContacts });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts.length !== prevState.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
+
   addContact = ({ name, number }) => {
     const alreadyExists = this.state.contacts.find(
       contact => contact.name === name,
@@ -29,7 +42,7 @@ class App extends Component {
       number,
     };
     this.setState(({ contacts }) => ({
-      contacts: [contact, ...contacts],
+      contacts: [...contacts, contact],
     }));
   };
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './ContactForm.scss';
 import { v4 } from 'uuid';
+import ContactFormStyled from './ContactFormStyled';
+import FormButtonStyled from './FormButtonStyled';
 
 class ContactForm extends Component {
   static propTypes = {
@@ -34,9 +35,12 @@ class ContactForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit} className="ContactForm">
-        <label htmlFor={this.nameInputId}>Name</label>
+      <ContactFormStyled onSubmit={this.handleSubmit}>
+        <label className="label" htmlFor={this.nameInputId}>
+          Name
+        </label>
         <input
+          className="input"
           type="text"
           name="name"
           pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -46,8 +50,11 @@ class ContactForm extends Component {
           value={this.state.name}
           onChange={this.handleChange}
         />
-        <label htmlFor={this.numberInputId}>Number</label>
+        <label className="label" htmlFor={this.numberInputId}>
+          Number
+        </label>
         <input
+          className="input"
           type="tel"
           name="number"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -57,8 +64,8 @@ class ContactForm extends Component {
           value={this.state.number}
           onChange={this.handleChange}
         />
-        <button type="submit">Add contact</button>
-      </form>
+        <FormButtonStyled>Add contact</FormButtonStyled>
+      </ContactFormStyled>
     );
   }
 }

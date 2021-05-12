@@ -1,13 +1,22 @@
 import React from 'react';
-import './ContactItem.scss';
+import PropTypes from 'prop-types';
+import ContactItemStyled from './ContactItemStyled';
+import DeleteButtonStyled from './DeleteButtonStyled';
 
-const ContactItem = ({ info, onDeleteContact }) => {
+const ContactItem = ({ info: { name, number, id }, onDeleteContact }) => {
   return (
-    <li className="ContactItem">
-      {info.name}: {info.number}
-      <button onClick={() => onDeleteContact(info.id)}>Delete</button>
-    </li>
+    <ContactItemStyled>
+      {name}: {number}
+      <DeleteButtonStyled onClick={() => onDeleteContact(id)}>
+        Delete
+      </DeleteButtonStyled>
+    </ContactItemStyled>
   );
+};
+
+ContactItem.propTypes = {
+  info: PropTypes.objectOf(PropTypes.string).isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };
 
 export default ContactItem;

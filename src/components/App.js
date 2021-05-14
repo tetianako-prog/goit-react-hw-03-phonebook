@@ -23,15 +23,15 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (this.state.contacts.length !== prevState.contacts.length) {
-      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    const { contacts } = this.state;
+    if (contacts.length !== prevState.contacts.length) {
+      localStorage.setItem('contacts', JSON.stringify(contacts));
     }
   }
 
   addContact = ({ name, number }) => {
-    const alreadyExists = this.state.contacts.find(
-      contact => contact.name === name,
-    );
+    const { contacts } = this.state;
+    const alreadyExists = contacts.find(contact => contact.name === name);
     if (alreadyExists) {
       alert(`${name} is already in contacts.`);
       return;
